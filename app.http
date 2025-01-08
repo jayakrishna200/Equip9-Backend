@@ -1,0 +1,27 @@
+###
+GET http://localhost:3000/users/
+
+###
+DELETE http://localhost:3000/users/
+###
+GET http://localhost:3000/user/7893821485/
+
+### 
+POST http://localhost:3000/register/
+Content-Type : application/json
+
+{
+    "first_name":"John",
+    "last_name":"Doe",
+    "mobile_number":7895555141,
+    "password":"john@123"
+}
+
+### 
+POST http://localhost:3000/login/
+Content-Type : application/json
+
+{
+    "mobile_number":7893821485,
+    "password":"Jaya@2003"
+}
