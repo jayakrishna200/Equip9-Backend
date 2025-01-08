@@ -5,7 +5,6 @@ const sqlite3 = require("sqlite3");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 
 let db = null;
 let app = express();
@@ -85,7 +84,7 @@ app.post("/login", async (request, response) => {
     if (isMatch) {
       const payload = { mobile_number: mobile_number };
       const jwtToken = jwt.sign(payload, "MY_SECRET_KEY");
-      response.send({ jwtToken: jwtToken, mobile_number: mobile_number });
+      response.send({ jwtToken: jwtToken });
     } else {
       response.status(400);
       response.send({ message: "Invalid password" });
@@ -122,7 +121,7 @@ app.get("/user/:mobileNumber", authenticateToken, async (request, response) => {
     SELECT * FROM registration
     WHERE mobile_number=${mobileNumber};`;
   const user = await db.get(getUserQuery);
-  response.send(user);
+  response.send({user_details:user});
 });
 
 ///// Create a new user
